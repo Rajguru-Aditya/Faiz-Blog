@@ -2,26 +2,28 @@ const API_url = "http://localhost:3000/api/posts/";
 const API = "http://localhost:3000/";
 
 window.onload = () => {
-    getPost();
-}
+  getPost();
+};
 
 const getPost = () => {
-   fetch(API_url, {
-       method: "GET"
-   }).then((response) => {
-       return response.json();
-   }).then((data) => {
-       buildPost(data)
-   })
-}
+  fetch(API_url, {
+    method: "GET",
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      buildPost(data);
+    });
+};
 
 const buildPost = (bPosts) => {
-   let blogPostContent = "";
-   for(blogPost of bPosts){
-       const img = `${API}${blogPost.post_image}`;
-       const date = new Date(parseInt(blogPost.added_date)).toDateString();
-       const postLink = `post.html?id=${blogPost.id}`;
-         blogPostContent += `
+  let blogPostContent = "";
+  for (blogPost of bPosts) {
+    const img = `${API}${blogPost.post_image}`;
+    const date = new Date(parseInt(blogPost.added_date)).toDateString();
+    const postLink = `post.html?id=${blogPost.id}`;
+    blogPostContent += `
            <a href="${postLink}">
                <div class="post">
                   <div class="post_img" style="background-image: url(${img})"></div>
@@ -32,7 +34,7 @@ const buildPost = (bPosts) => {
                   </div>
                 </div>
            </a>
-        `
-   }
-   document.querySelector(".blog-cont").innerHTML = blogPostContent;
-}
+        `;
+  }
+  document.querySelector(".blog-cont").innerHTML = blogPostContent;
+};
